@@ -1,0 +1,27 @@
+.container {
+    height: 100%;
+}
+.spanContainer {
+    padding: 1rem;
+    display: flex;
+    justify-content: end;
+}
+.timeUnitSpan {
+    opacity: 0.5; 
+    margin-right: 6px; 
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    font-weight: bold;
+}
+
+.timeUnitSpan:hover {
+    opacity: 1;
+    transition: .3s ease-in-out;
+}
+
+.spanActive {
+    opacity: 1;
+    color: black;
+}
+  
+  
