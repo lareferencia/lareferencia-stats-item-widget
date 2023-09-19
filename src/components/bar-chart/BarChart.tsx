@@ -13,7 +13,7 @@ interface EventCount {
 }
 
 
-export const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) => {
+const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) => {
 
   const [timeInterval, setTimeIntervale] = useState({ type: 'slider', start: 95, end: 100});
   const chartRef = useRef(null);
@@ -130,3 +130,4 @@ export const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabe
 }
 
 
+export default BarChart
