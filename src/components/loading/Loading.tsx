@@ -1,6 +1,6 @@
 import { MoonLoader } from 'react-spinners';
 
-export const Loading = () => {
+const Loading = () => {
   return (
     <div style={{height: '450px', display:'flex', justifyContent:'center', alignItems:'center'}}>
        
@@ -14,3 +14,5 @@ export const Loading = () => {
     </div>
   )
 }
+
+export default Loading

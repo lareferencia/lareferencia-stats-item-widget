@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, startTransition } from 'react';
 
-import { BarChart } from './components/bar-chart/BarChart';
+const BarChart = React.lazy( () => import('./components/bar-chart/BarChart'))
+const Loading = React.lazy( () => import('./components/loading/Loading'))
+const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
 
-import { Loading } from './components/loading/Loading';
 import style from './styles/app.module.css';
 
 
@@ -29,6 +30,7 @@ function App() {
   }
  
   const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
+  // const preview: boolean = true;
   const sourceId = widgetParams && widgetParams.repository_source || ''
 
   const [data, setData] = useState<Stadistics>();
@@ -48,9 +50,7 @@ function App() {
       end_date: 'now',
       time_unit: timeUnit
     };
-    console.log(params);
     
-
     if(previewImage === true) return;
     setIsLoading(true);
       
@@ -93,46 +93,55 @@ function App() {
       : '';
   };
 
+  const handleDeletePreview = () =>{
+    startTransition(() => {
+      setPreviewImage(false);
+    });
+  }
+
 
   return (
     <>
-    { !error ? <div className={style.container}>
-      { previewImage ? 
-      <div className={style.container} 
-        style={{display:'flex', justifyContent:'center', alignContent:'center'}}>
-        <img
-          className={style.preview_img} 
-          onClick={() => setPreviewImage(false)} 
-          src='./widget-preview.png' alt="" 
-        />
+
+  {!error ? 
+
+    ( <div className={style.container}>
+      {previewImage ? (
+        <div onClick={handleDeletePreview}>
+          <PreviewImage />
+        </div>
+      ) : (
+        <>
+          <div>
+            <button
+              onClick={() => handleChangeTimeUnit('day')}
+              className={`${isButtonActive('day')} ${style.timeUnitButton}`}
+            >
+              Day
+            </button>
+            <button
+              onClick={() => handleChangeTimeUnit('week')}
+              className={`${isButtonActive('week')} ${style.timeUnitButton}`}
+            >
+              Week
+            </button>
+            <button
+              onClick={() => handleChangeTimeUnit('month')}
+              className={`${isButtonActive('month')} ${style.timeUnitButton}`}
+            >
+              Month
+            </button>
+          </div>
+          { isLoading || !data ? <Loading /> : <BarChart data={data} scopeLabels={scopeLabels} eventLabels={eventLabels} /> }
+        </>
+      )}
+    </div> ) : 
+      ( <div className={style.error_container}>
+        <h1>No se encontraron datos</h1>
       </div>
-      :
-      <>
-       <div>
-        <button 
-          onClick={() =>handleChangeTimeUnit('day')} 
-          className={`${isButtonActive('day')} ${style.timeUnitButton}`}>
-            Day
-        </button>
+    )}
 
-        <button 
-          onClick={() =>handleChangeTimeUnit('week')} 
-          className={`${isButtonActive('week')} ${style.timeUnitButton}`}>
-            Week
-        </button>
-
-        <button 
-          onClick={() =>handleChangeTimeUnit('month')} 
-          className={`${isButtonActive('month')} ${style.timeUnitButton}`}>
-            Month
-        </button>
-
-      </div>
-        { isLoading || !data  ? <Loading/> : <BarChart data={data} scopeLabels={scopeLabels} eventLabels={eventLabels}/> }
-      </>
-    }
-    </div> : <div className={style.error_container}> <h1>No se encontraron datos</h1> </div>} 
-    </>
+  </>
   );
 }
 
