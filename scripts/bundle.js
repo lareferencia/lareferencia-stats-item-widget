@@ -7,7 +7,7 @@ require("esbuild")
   .build({
     logLevel: "info",
     format:'esm',
-    outdir: "dist/chunks",
+    outdir: "dist",
     entryPoints: ["src/main.tsx"],
     inject: ["scripts/react-shim.js"],
     treeShaking: true,
