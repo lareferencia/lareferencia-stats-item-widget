@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const cssModulesPlugin = require("esbuild-css-modules-plugin");
-const inlineImage = require("esbuild-plugin-inline-image");
+// const inlineImage = require("esbuild-plugin-inline-image");
 
 require("esbuild")
   .build({
@@ -13,9 +13,10 @@ require("esbuild")
     treeShaking: true,
     bundle: true,
     // outfile: "dist/widget.js", // Cambia el nombre del archivo de salida principal
-    plugins: [cssModulesPlugin(), inlineImage()],
+    plugins: [cssModulesPlugin()],
     loader: {
-      ".js": "tsx",
+      '.js': 'tsx',
+      '.png': 'file', // Configura el cargador para archivos PNG
     },
     minify: true,
     target: "es2015",

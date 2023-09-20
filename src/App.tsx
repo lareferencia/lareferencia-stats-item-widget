@@ -1,13 +1,9 @@
 import React, { useState, useEffect, startTransition } from 'react';
 
-// import { BarChart } from './components/bar-chart/BarChart';
-
-// import { Loading } from './components/loading/Loading';
 const BarChart = React.lazy( () => import('./components/bar-chart/BarChart'))
 const Loading = React.lazy( () => import('./components/loading/Loading'))
 const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
 
-// Importación dinámica para Loading
 import style from './styles/app.module.css';
 
 
@@ -33,9 +29,9 @@ function App() {
     outlink: 'Enalces'
   }
  
-  // const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
-  const preview: boolean = true;
-  const sourceId = widgetParams && widgetParams.repository_source || 'SITEID::1'
+  const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
+  // const preview: boolean = true;
+  const sourceId = widgetParams && widgetParams.repository_source || ''
 
   const [data, setData] = useState<Stadistics>();
   const [isLoading, setIsLoading] = useState(false); 
