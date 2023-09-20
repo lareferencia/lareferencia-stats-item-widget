@@ -6,11 +6,9 @@ const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
 
 import style from './styles/app.module.css';
 
-
 import axios from 'axios';
 import { Stadistics } from './interfaces/stadistics.interface';
 import { baseUrl } from './api/api';
-
 
 
 function App() {
