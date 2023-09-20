@@ -12,7 +12,6 @@ require("esbuild")
     inject: ["scripts/react-shim.js"],
     treeShaking: true,
     bundle: true,
-    // outfile: "dist/widget.js", // Cambia el nombre del archivo de salida principal
     plugins: [cssModulesPlugin()],
     loader: {
       '.js': 'tsx',
