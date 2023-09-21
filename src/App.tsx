@@ -3,6 +3,7 @@ import React, { useState, useEffect, startTransition } from 'react';
 const BarChart = React.lazy( () => import('./components/bar-chart/BarChart'))
 const Loading = React.lazy( () => import('./components/loading/Loading'))
 const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
+const ErrorView = React.lazy( () => import('./components/ErrorView'))
 
 import style from './styles/app.module.css';
 
@@ -29,7 +30,7 @@ function App() {
  
   const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
   // const preview: boolean = true;
-  const sourceId = widgetParams && widgetParams.repository_source || 'SITEID::61'
+  const sourceId = widgetParams && widgetParams.repository_source || ''
 
   const [data, setData] = useState<Stadistics>();
   const [isLoading, setIsLoading] = useState(false); 
@@ -100,9 +101,7 @@ function App() {
 
   return (
     <>
-
   {!error ? 
-
     ( <div className={style.container}>
       {previewImage ? (
         <div onClick={handleDeletePreview}>
@@ -134,11 +133,8 @@ function App() {
         </>
       )}
     </div> ) : 
-      ( <div className={style.error_container}>
-        <h1>No se encontraron datos</h1>
-      </div>
+      ( <ErrorView/>
     )}
-
   </>
   );
 }
