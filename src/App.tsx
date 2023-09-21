@@ -3,14 +3,13 @@ import React, { useState, useEffect, startTransition } from 'react';
 const BarChart = React.lazy( () => import('./components/bar-chart/BarChart'))
 const Loading = React.lazy( () => import('./components/loading/Loading'))
 const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
+const ErrorView = React.lazy( () => import('./components/ErrorView'))
 
 import style from './styles/app.module.css';
-
 
 import axios from 'axios';
 import { Stadistics } from './interfaces/stadistics.interface';
 import { baseUrl } from './api/api';
-
 
 
 function App() {
@@ -102,9 +101,7 @@ function App() {
 
   return (
     <>
-
   {!error ? 
-
     ( <div className={style.container}>
       {previewImage ? (
         <div onClick={handleDeletePreview}>
@@ -136,11 +133,8 @@ function App() {
         </>
       )}
     </div> ) : 
-      ( <div className={style.error_container}>
-        <h1>No se encontraron datos</h1>
-      </div>
+      ( <ErrorView/>
     )}
-
   </>
   );
 }
