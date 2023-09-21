@@ -6,9 +6,9 @@ import App from './App.tsx'
 
 
 ReactDOM.createRoot(document.getElementById('my-widget')!).render( 
-    //<React.StrictMode> 
+    <React.StrictMode> 
         <App /> 
-    //</React.StrictMode>
+    </React.StrictMode>
 
 )
  
