@@ -38,6 +38,6 @@ jobs:
         target_branch: main
         source_files: dist/ package.json changelog.md
         remote_repository: https://github.com/lareferencia/lrhw
-        access_token: ${{ secrets.ACCESS_TOKEN }}
+        access_token: ${{ secrets.GITHUB_TOKEN }}
 
 
