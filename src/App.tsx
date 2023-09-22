@@ -114,19 +114,19 @@ function App() {
               onClick={() => handleChangeTimeUnit('day')}
               className={`${isButtonActive('day')} ${style.timeUnitButton}`}
             >
-              Day
+              Día
             </button>
             <button
               onClick={() => handleChangeTimeUnit('week')}
               className={`${isButtonActive('week')} ${style.timeUnitButton}`}
             >
-              Week
+              Semana
             </button>
             <button
               onClick={() => handleChangeTimeUnit('month')}
               className={`${isButtonActive('month')} ${style.timeUnitButton}`}
             >
-              Month
+              Mes
             </button>
           </div>
           { isLoading || !data ? <Loading /> : <BarChart data={data} scopeLabels={scopeLabels} eventLabels={eventLabels} /> }
