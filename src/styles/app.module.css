@@ -7,10 +7,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 100%;
     margin: 0 auto;
     padding: 2rem;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; 
     line-height: 1.5;
     font-weight: 400;
     color: #1a1a1a;
@@ -18,10 +18,9 @@
 
 .container {
     height: 100%;
-    width: 100%;
     margin: 0 auto;
     padding: 2rem;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; 
     line-height: 1.5;
     font-weight: 400;
     border-radius: 10px;

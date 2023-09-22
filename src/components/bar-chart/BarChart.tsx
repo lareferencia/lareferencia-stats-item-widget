@@ -74,7 +74,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) =
         xAxis: [ { type: 'category', data: xAxis } ],
         yAxis: [ { type: 'value', splitLine: { show: false } } ],      
         series: series,
-        textStyle:{ fontFamily: "Inter", fontWeight: 700, },
+        textStyle:{ fontFamily: 'Poppins, sans-serif', fontWeight: 700 },
       };
   
       //Responsive for the chart
@@ -105,26 +105,26 @@ const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) =
 
   return (
     <>
-      <div ref={chartRef} className={style.container} ></div>
       
-        <div className={style.spanContainer}>
+      <div className={style.spanContainer}>
+        <span 
+          className={`${handleActiveInteraval(95)} ${style.timeUnitSpan}`}
+          onClick={() =>handleSetTimeInterval(95)}>
+            1m
+        </span>
+        <span 
+          className={`${handleActiveInteraval(84)} ${style.timeUnitSpan}`}
+          onClick={() =>handleSetTimeInterval(84)}>
+            3m
+        </span>
+        <span 
+          className={`${handleActiveInteraval(69)} ${style.timeUnitSpan}`}
+          onClick={() =>handleSetTimeInterval(69)}>
+            6m
+        </span>
+      </div>
+      <div ref={chartRef} className={style.container} ></div>
 
-          <span 
-            className={`${handleActiveInteraval(95)} ${style.timeUnitSpan}`}
-            onClick={() =>handleSetTimeInterval(95)}>
-              1m
-          </span>
-          <span 
-            className={`${handleActiveInteraval(84)} ${style.timeUnitSpan}`}
-            onClick={() =>handleSetTimeInterval(84)}>
-              3m
-          </span>
-          <span 
-            className={`${handleActiveInteraval(69)} ${style.timeUnitSpan}`}
-            onClick={() =>handleSetTimeInterval(69)}>
-              6m
-          </span>
-        </div>
     </>
   )
 }
