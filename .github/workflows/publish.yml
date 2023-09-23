@@ -39,5 +39,7 @@ jobs:
         source_files: dist/ package.json changelog.md
         remote_repository: https://github.com/lareferencia/lrhw
         access_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+
 
 
