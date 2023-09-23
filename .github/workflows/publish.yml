@@ -11,6 +11,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        persist-credentials: false
 
     - name: Set Node.js 16.x
       uses: actions/setup-node@v3
@@ -36,7 +39,7 @@ jobs:
       with:
         commit_message: update to version ${{ env.PACKAGE_VERSION }}
         email: ${{ github.actor }}@users.noreply.github.com
-        name: ${{ github.actor }}
+        name: ${{ github.actor }} 
         target_branch: main
         source_files: dist/ package.json changelog.md
         remote_repository: https://github.com/lareferencia/lrhw
