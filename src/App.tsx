@@ -30,7 +30,7 @@ function App() {
  
   const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
   // const preview: boolean = true;
-  const sourceId = widgetParams && widgetParams.repository_source || 'SITEID::59'
+  const sourceId = widgetParams && widgetParams.repository_source || ''
 
   const [data, setData] = useState<Stadistics>();
   const [isLoading, setIsLoading] = useState(false); 
