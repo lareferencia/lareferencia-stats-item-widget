@@ -79,11 +79,7 @@ function App() {
 
   const handleChangeTimeUnit = (timeUnitType: string) => {
     setTimeUnit(
-      timeUnitType === 'day' 
-      ? 'day' 
-      : timeUnitType === 'month' 
-      ? 'month' 
-      : 'week');
+      ( timeUnitType !== 'day' && timeUnitType !== 'month' ) ? 'week' : timeUnitType);
   };
 
   const isButtonActive = (buttonTimeUnit: string) => {

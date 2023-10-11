@@ -97,7 +97,8 @@ const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) =
   const handleSetTimeInterval = (interval: number) => {
     setTimeIntervale({
       type: 'slider',
-      start: interval === 95 ? 95  : interval === 84  ? 84  : 69, end: 100 })
+      start: ( interval !== 95 && interval !== 84 ) ? 69 : interval, 
+      end: 100 })
   };
 
   const handleActiveInteraval = (interval: number) => timeInterval.start === interval  ? style.spanActive  : '';
