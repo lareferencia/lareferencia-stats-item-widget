@@ -5,7 +5,7 @@ import App from './App.tsx'
 
 
 
-ReactDOM.createRoot(document.getElementById('lareferencia-repository-widget')!).render( 
+ReactDOM.createRoot(document.getElementById('lrhw-widget')!).render( 
     <React.StrictMode> 
         <App /> 
     </React.StrictMode>

@@ -27,6 +27,9 @@ function App() {
     view: 'Vistas',
     outlink: 'Enalces'
   }
+  const styles = widgetParams && widgetParams.styles.chart || {
+    height: '300px',
+  }
  
   const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
   // const preview: boolean = true;
@@ -125,7 +128,16 @@ function App() {
               Mes
             </button>
           </div>
-          { isLoading || !data ? <Loading /> : <BarChart data={data} scopeLabels={scopeLabels} eventLabels={eventLabels} /> }
+          { isLoading || !data 
+            ? <Loading 
+                styles={styles} /> 
+            : <BarChart 
+                styles={styles} 
+                data={data} 
+                scopeLabels={scopeLabels} 
+                eventLabels={eventLabels} 
+              /> 
+            }
         </>
       )}
     </div> ) : 
