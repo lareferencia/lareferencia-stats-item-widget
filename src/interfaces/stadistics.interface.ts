@@ -18,6 +18,7 @@ export interface BarChartProps {
     data: Stadistics;
     scopeLabels: ScopeLabels;
     eventLabels: EventLabels
+    styles?: any;
 }
 
 export interface ScopeLabels{

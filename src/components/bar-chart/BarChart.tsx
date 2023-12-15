@@ -13,14 +13,15 @@ interface EventCount {
 }
 
 
-const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) => {
+const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels, styles }) => {
 
   const [timeInterval, setTimeIntervale] = useState({ type: 'slider', start: 95, end: 100});
-  const chartRef = useRef(null);
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const events = getEvents(data, scopeLabels, eventLabels); 
   const mergedEvents = mergeEventsByDate(events);  
   
+ 
     
   useEffect(() => {
     
@@ -30,6 +31,9 @@ const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) =
       const xAxis = mergedEvents.map( event => event.Fecha)
       const series: any[] = [];
       //agregale el tipo a la serie
+      
+      // chartRef.current.style.height = `${styles.height}`;
+      // console.log(chartRef.current);
 
 
       // start transforming the data for the chart
@@ -124,7 +128,7 @@ const BarChart: React.FC<BarChartProps> = ({ data, scopeLabels, eventLabels }) =
             6m
         </span>
       </div>
-      <div ref={chartRef} className={style.container} ></div>
+      <div id="bar-chart" ref={chartRef} className={style.container} style={{height:`${styles.height}`}} ></div>
 
     </>
   )

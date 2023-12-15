@@ -1,13 +1,17 @@
 import { MoonLoader } from 'react-spinners';
 
-const Loading = () => {
+type LoadingProps = {
+  styles: any;
+}
+const Loading: React.FC<LoadingProps>  = ({styles}) => {
+
   return (
-    <div style={{height: '450px', display:'flex', justifyContent:'center', alignItems:'center'}}>
+    <div style={{height: `${styles.height}`, display:'flex', justifyContent:'center', alignItems:'center'}}>
        
         <MoonLoader
           color="#080a09"
           cssOverride={{}}
-          size={70}
+          size={40}
           speedMultiplier={1}
         />
 
