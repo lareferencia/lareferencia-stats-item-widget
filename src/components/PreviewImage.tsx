@@ -1,19 +1,13 @@
-import style from '../styles/app.module.css';
-import previewImageSrc from '../assets/widget-preview.png'; // Asegúrate de especificar la ruta correcta de tu imagen
-
-
+import { Box, Image } from "@chakra-ui/react";
+import previewImageSrc from "../assets/widget-preview.png";
 
 const PreviewImage = () => {
+  
   return (
-    <div className={style.container} 
-        style={{display:'flex', justifyContent:'center', alignContent:'center'}}>
-        <img
-          className={style.preview_img}
-          src={previewImageSrc} alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      </div>
-  )
-}
+    <Box display="flex" justifyContent="center" alignContent="center" cursor='pointer'>
+      <Image objectFit="cover" src={previewImageSrc} alt="" />
+    </Box>
+  );
+};
 
-export default PreviewImage
+export default PreviewImage;

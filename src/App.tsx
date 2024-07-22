@@ -1,149 +1,224 @@
-import React, { useState, useEffect, startTransition } from 'react';
+import React, { useState, useEffect, startTransition, Suspense } from "react";
+import { fetchData, itemWs } from "./api/api";
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Image,
+  Box,
+  Divider,
+} from "@chakra-ui/react";
 
-const BarChart = React.lazy( () => import('./components/bar-chart/BarChart'))
-const Loading = React.lazy( () => import('./components/loading/Loading'))
-const PreviewImage = React.lazy( () => import('./components/PreviewImage'))
-const ErrorView = React.lazy( () => import('./components/ErrorView'))
+const Loading = React.lazy(() => import("./components/loading/Loading"));
+const PreviewImage = React.lazy(() => import("./components/PreviewImage"));
+const ErrorView = React.lazy(() => import("./components/ErrorView"));
+const ChartsContainer = React.lazy(
+  () => import("./components/charts/ChartsContainer")
+);
+const ByCountryChartsContainer = React.lazy(
+  () => import("./components/charts/by-country-charts/ByCountryChartsContainer")
+);
 
-import style from './styles/app.module.css';
+import helpImage from "./assets/usage-stats-help.png";
+import logo from "./assets/logo-la-referencia.png";
 
-import axios from 'axios';
-import { Stadistics } from './interfaces/stadistics.interface';
-import { baseUrl } from './api/api';
+import { Statistics } from "./interfaces/stadistics.interface";
 
+import { useTranslation } from "react-i18next";
+import { getEventLabels, getScopeLabels } from "./utils/scopes-and-events";
+import {
+  DEFAULT_EMBED_FUNCTION_NAME,
+  DEFAULT_END_DATE,
+  DEFAULT_SOURCE_ID,
+  DEFAULT_START_DATE,
+  DEFAULT_TIME_UNIT,
+} from "./config";
+import { ScopeButtons } from "./components/charts/ScopeButtons";
+import { DateButtons } from "./components/charts/DateButtons";
+import { getIdentifier } from "./utils";
 
 function App() {
+  const { t: translate, i18n } = useTranslation();
 
-  const embbedFunction = 'lrhw';
+  // DATA, LOADING AND ERROR STATES
+  const [data, setData] = useState<Statistics>();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [activeScope, setActiveScope] = useState("ALL");
+  const [isByCountryChartsLoaded, setIsByCountryChartsLoaded] = useState(false);
+
+  // DATE STATE
+  const [startDate, setStartDate] = useState("now-6M");
+
+  // WIDGET PARAMS
+  const embbedFunction = DEFAULT_EMBED_FUNCTION_NAME;
   const widgetParams = (window as any)[embbedFunction];
+  const lang = (widgetParams && widgetParams.parameters.lang) || "es";
 
-  const scopeLabels = widgetParams && widgetParams.scope_labels || {
-    L: 'La Referencia',
-    N: 'nodo nacional',
-    R: 'repositorio'
-  }
-  const eventLabels = widgetParams && widgetParams.event_labels || {
-    download: 'Descargas',
-    view: 'Vistas',
-    outlink: 'Enalces'
-  }
-  const styles = widgetParams && widgetParams.styles.chart || {
-    height: '300px',
-  }
- 
-  const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
-  // const preview: boolean = true;
-  const sourceId = widgetParams && widgetParams.repository_source || ''
+  const sourceId =
+    (widgetParams && widgetParams.parameters.repository_source) ||
+    DEFAULT_SOURCE_ID;
 
-  const [data, setData] = useState<Stadistics>();
-  const [isLoading, setIsLoading] = useState(false); 
-  const [error, setError] = useState(false)
-  
-
-  const [timeUnit, setTimeUnit] = useState('week');
+  const preview: boolean =
+    widgetParams && widgetParams.parameters.preview !== false ? true : true;
   const [previewImage, setPreviewImage] = useState(preview);
 
-  const fetchData = async () => { 
+  // Fetch data from API
 
-    const params = {
-      // identifier: 'oai:sedici.unlp.edu.ar:10915/74434',
-      source: sourceId,
-      start_date: 'now-20y',
-      end_date: 'now',
-      time_unit: timeUnit
-    };
-    
-    if(previewImage === true) return;
+  const fetchDataAsync = async () => {
+    const identifier = getIdentifier(widgetParams);
+    console.log({ identifier });
+
+    if (previewImage === true) return;
     setIsLoading(true);
-      
-    axios({
-      method: 'GET',
-      url: baseUrl,
-      params: params,
-    }).then(response => {
-      if(response.data.level){
-        setData(response.data);
+
+    try {
+      const resp = await fetchData(
+        itemWs,
+        identifier, // TODO: Quitar el DEFAULT_IDENTIFIER
+        DEFAULT_SOURCE_ID,
+        startDate || DEFAULT_START_DATE,
+        DEFAULT_END_DATE,
+        DEFAULT_TIME_UNIT
+      );
+
+      if (resp.level) {
+        setData(resp);
       } else {
-        console.log('Vino objeto vacio'); 
         setError(true);
       }
-    setIsLoading(false);
-    }).catch(error => {
-      console.log(error);
-      setError(true);
-    });
-  
-  }
-    
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  // Fetch data on component mount
   useEffect(() => {
-    fetchData();
-  }, [ timeUnit, previewImage, sourceId ]);
+    i18n.changeLanguage(lang);
+    fetchDataAsync();
+  }, [previewImage, sourceId, startDate]);
 
-
-  const handleChangeTimeUnit = (timeUnitType: string) => {
-    setTimeUnit(
-      ( timeUnitType !== 'day' && timeUnitType !== 'month' ) ? 'week' : timeUnitType);
-  };
-
-  const isButtonActive = (buttonTimeUnit: string) => {
-    return timeUnit === buttonTimeUnit 
-      ? style.buttonActive 
-      : '';
-  };
-
-  const handleDeletePreview = () =>{
+  const handleDeletePreview = () => {
     startTransition(() => {
       setPreviewImage(false);
     });
-  }
+  };
+  const handleTabChange = (index: number) => {
+    if (index === 1) {
+      setIsByCountryChartsLoaded(true);
+    }
+    handleTabIndexChanged(index);
+  };
 
+  const handleTabIndexChanged = (index: number) => {
+    setTabIndex(index);
+  };
 
   return (
-    <>
-  {!error ? 
-    ( <div className={style.container}>
+    <Box as="main" className="widget-container">
+      {/* Show preview only the preview img */}
       {previewImage ? (
-        <div onClick={handleDeletePreview}>
+        <Box onClick={handleDeletePreview}>
           <PreviewImage />
-        </div>
+        </Box>
       ) : (
         <>
-          <div>
-            <button
-              onClick={() => handleChangeTimeUnit('day')}
-              className={`${isButtonActive('day')} ${style.timeUnitButton}`}
-            >
-              Día
-            </button>
-            <button
-              onClick={() => handleChangeTimeUnit('week')}
-              className={`${isButtonActive('week')} ${style.timeUnitButton}`}
-            >
-              Semana
-            </button>
-            <button
-              onClick={() => handleChangeTimeUnit('month')}
-              className={`${isButtonActive('month')} ${style.timeUnitButton}`}
-            >
-              Mes
-            </button>
-          </div>
-          { isLoading || !data 
-            ? <Loading 
-                styles={styles} /> 
-            : <BarChart 
-                styles={styles} 
-                data={data} 
-                scopeLabels={scopeLabels} 
-                eventLabels={eventLabels} 
-              /> 
-            }
+          <Box bgColor="#f1fbf697">
+            <Box display="flex" justifyContent="space-between" px="1" py="3">
+              <ScopeButtons
+                tabIndex={tabIndex}
+                activeScope={activeScope}
+                setActiveScope={setActiveScope}
+                scopeLabels={getScopeLabels(widgetParams, translate)}
+              />
+              <DateButtons
+                translate={translate}
+                setStartDate={setStartDate}
+                startDate={startDate}
+              />
+            </Box>
+          </Box>
+
+          {/* The tabs with the charts and the help img */}
+          <Tabs bgColor="#f1fbf697" onChange={handleTabChange}>
+            <TabList>
+              <Tab fontSize="sm" fontWeight="500">
+                {translate("general-tab")}
+              </Tab>
+              <Tab fontSize="sm" fontWeight="500">
+                {translate("by-country-tab")}
+              </Tab>
+              <Tab fontSize="sm" fontWeight="500">
+                {translate("help-img-tab")}
+              </Tab>
+            </TabList>
+
+            <TabPanels>
+              {/* General tab */}
+              <TabPanel>
+                {!error ? (
+                  <Box>
+                    {isLoading || !data ? (
+                      <Loading />
+                    ) : (
+                      <ChartsContainer
+                        data={data}
+                        translate={translate}
+                        scopeLabels={getScopeLabels(widgetParams, translate)}
+                        eventLabels={getEventLabels(translate)}
+                        tabIndex={tabIndex}
+                        activeScope={activeScope}
+                        setActiveScope={setActiveScope}
+                      />
+                    )}
+                  </Box>
+                ) : (
+                  <ErrorView />
+                )}
+              </TabPanel>
+
+              {/* By country tab */}
+              <TabPanel>
+                {isByCountryChartsLoaded ? (
+                  <Suspense fallback={<Loading />}>
+                    <Box>
+                      <ByCountryChartsContainer
+                        tabIndex={tabIndex}
+                        startDate={startDate}
+                      />
+                    </Box>
+                  </Suspense>
+                ) : (
+                  <Box>Click the tab to load content</Box>
+                )}
+              </TabPanel>
+
+              {/* Help tab */}
+              <TabPanel padding={0}>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignContent="center"
+                >
+                  <Image objectFit="cover" src={helpImage} alt="" />
+                </Box>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
+          <Divider />
+
+          {/* Footer img */}
+          <Box p="1rem" display="flex" justifyContent="center">
+            <Image src={logo} w="55%" alt="La referencia" />
+          </Box>
         </>
       )}
-    </div> ) : 
-      ( <ErrorView/>
-    )}
-  </>
+    </Box>
   );
 }
 

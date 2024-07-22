@@ -2,15 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <meta
+      name="citation_abstract_html_url"
+      content="http://sedici.unlp.edu.ar/handle/10915/113959"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Historic widget</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Usage stats widget</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="lrhw-widget"></div>
+    <div id="lrw-widget"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
+
+    <script>
+      (function (window, document, scriptTag, globalVar, paramsKey, cdnUrl) {
+        window[globalVar] =
+          window[globalVar] ||
+          function () {
+            window[globalVar][paramsKey] = window[globalVar][paramsKey] || {};
+            Object.assign(window[globalVar][paramsKey], arguments[0] || {});
+          };
+
+        const scriptElement = document.createElement(scriptTag);
+        scriptElement.id = globalVar;
+        scriptElement.src = cdnUrl;
+        scriptElement.type = "module";
+        scriptElement.defer = true; // Use defer instead of async if appropriate
+
+        scriptElement.onerror = function () {
+          console.error(`Failed to load script ${scriptElement.src}`);
+        };
+
+        const firstScript = document.getElementsByTagName(scriptTag)[0];
+        firstScript.parentNode.insertBefore(scriptElement, firstScript);
+      })(
+        window,
+        document,
+        "script",
+        "lrw",
+        "parameters",
+        "https://cdn.jsdelivr.net/gh/lareferencia/lrw@1.1.5/dist/lrw.js"
+      );
+      window["lrw"]({
+        widget_div_id: "lrw-widget",
+
+        // identifier: "oai:sedici.unlp.edu.ar:10915/113959",
+        identifier_meta_field: "citation_abstract_html_url",
+        identifier_prefix: "oai:sedici.unlp.edu.ar:10915/",
+        // identifier_regex: "https://hdl.handle.net/[0-9\\.]+/([0-9]+)/?",
+        identifier_regex: "http://sedici.unlp.edu.ar/handle/[0-9\\.]+/([0-9]+)/?",
+        
+
+        scope_labels: {
+          N: "Nodo Nacional",
+          R: "Sedici",
+        },
+        country: "AR",
+        repository_source: "OPENDOAR::1329",
+        lang: "es",
+      });
+    </script>
   </body>
 </html>
