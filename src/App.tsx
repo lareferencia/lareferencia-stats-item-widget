@@ -33,7 +33,7 @@ function App() {
  
   const preview: boolean = widgetParams && widgetParams.preview !== false ? true : false;
   // const preview: boolean = true;
-  const sourceId = widgetParams && widgetParams.repository_source || ''
+  const sourceId = widgetParams && widgetParams.repository_source || 'SITEID::61'
 
   const [data, setData] = useState<Stadistics>();
   const [isLoading, setIsLoading] = useState(false); 
@@ -108,6 +108,8 @@ function App() {
         </div>
       ) : (
         <>
+        <h4 style={{fontWeight:'500'}}>Nodo: Ecuador</h4>
+        
           <div>
             <button
               onClick={() => handleChangeTimeUnit('day')}
