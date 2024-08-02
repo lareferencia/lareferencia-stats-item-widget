@@ -1,14 +1,16 @@
-import style from '../styles/app.module.css'
-
-
-
+import { Box, Text } from "@chakra-ui/react";
 
 const ErrorView = () => {
   return (
-    <div className={style.error_container}>
-        <h1>No se encontraró informacion</h1>
-    </div>
-  )
-}
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100%"
+    >
+      <Text as="h1">No se encontraró informacion</Text>
+    </Box>
+  );
+};
 
-export default ErrorView
+export default ErrorView;

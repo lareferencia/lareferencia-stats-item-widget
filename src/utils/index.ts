@@ -1,5 +1,2 @@
-export * from './get-events'
-export * from './transformDataForChart'
-export * from './merge-arrays'
-export * from './set-colors'
-export * from './set-event-type'
+export * from './set-colors';
+export * from './get-identifier';

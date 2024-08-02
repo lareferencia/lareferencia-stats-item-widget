@@ -1,22 +1,22 @@
-import { MoonLoader } from 'react-spinners';
+import { Box } from "@chakra-ui/react";
+import { MoonLoader } from "react-spinners";
 
-type LoadingProps = {
-  styles: any;
-}
-const Loading: React.FC<LoadingProps>  = ({styles}) => {
-
+const Loading = () => {
   return (
-    <div style={{height: `${styles.height}`, display:'flex', justifyContent:'center', alignItems:'center'}}>
-       
-        <MoonLoader
-          color="#080a09"
-          cssOverride={{}}
-          size={40}
-          speedMultiplier={1}
-        />
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="500px"
+    >
+      <MoonLoader
+        color="#080a09"
+        cssOverride={{}}
+        size={40}
+        speedMultiplier={1}
+      />
+    </Box>
+  );
+};
 
-    </div>
-  )
-}
-
-export default Loading
+export default Loading;
