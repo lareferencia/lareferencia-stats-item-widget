@@ -70,8 +70,6 @@ function App() {
 
   const fetchDataAsync = async () => {
     const identifier = getIdentifier(widgetParams);
-    console.log({ identifier });
-
     if (previewImage === true) return;
     setIsLoading(true);
 
@@ -127,21 +125,24 @@ function App() {
         </Box>
       ) : (
         <>
-          <Box bgColor="#f1fbf697">
-            <Box display="flex" justifyContent="space-between" px="1" py="3">
-              <ScopeButtons
-                tabIndex={tabIndex}
-                activeScope={activeScope}
-                setActiveScope={setActiveScope}
-                scopeLabels={getScopeLabels(widgetParams, translate)}
-              />
-              <DateButtons
-                translate={translate}
-                setStartDate={setStartDate}
-                startDate={startDate}
-              />
+          {data && (
+            <Box bgColor="#f1fbf697">
+              <Box display="flex" justifyContent="space-between" px="1" py="3">
+                <ScopeButtons
+                  data={data}
+                  tabIndex={tabIndex}
+                  activeScope={activeScope}
+                  setActiveScope={setActiveScope}
+                  scopeLabels={getScopeLabels(widgetParams, translate)}
+                />
+                <DateButtons
+                  translate={translate}
+                  setStartDate={setStartDate}
+                  startDate={startDate}
+                />
+              </Box>
             </Box>
-          </Box>
+          )}
 
           {/* The tabs with the charts and the help img */}
           <Tabs bgColor="#f1fbf697" onChange={handleTabChange}>

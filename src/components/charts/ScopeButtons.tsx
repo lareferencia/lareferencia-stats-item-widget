@@ -7,23 +7,25 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { ScopeLabels } from "../../interfaces/stadistics.interface";
-import { DEFAULT_SCOPES_KEYS } from "../../config";
+import { ScopeLabels, Statistics } from "../../interfaces/stadistics.interface";
 
 type ScopeButtonsProps = {
   scopeLabels: ScopeLabels;
   activeScope: string;
   setActiveScope: (value: string) => void;
   tabIndex: number;
+  data: Statistics;
 };
 
 export const ScopeButtons = ({
   activeScope,
   setActiveScope,
   scopeLabels,
-  tabIndex
+  tabIndex,
+  data
 }: ScopeButtonsProps) => {
 
+  const scopes = [...data.level.buckets.map((bucket) => bucket.key), "ALL"];
   
   return (
     <Box display="flex" gap="8px" mt="1rem" flexWrap="wrap">
@@ -38,7 +40,7 @@ export const ScopeButtons = ({
           {scopeLabels[activeScope as keyof ScopeLabels]}
         </MenuButton>
         <MenuList>
-          {DEFAULT_SCOPES_KEYS.map((label: string, index: number) => (
+          {scopes.map((label: string, index: number) => (
             <MenuItem
               key={index}
               onClick={() => setActiveScope(label)}

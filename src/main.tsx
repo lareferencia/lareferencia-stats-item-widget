@@ -8,9 +8,9 @@ import theme from "./theme.ts";
 import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("lrw-widget")!).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
-  // </React.StrictMode>
+  </React.StrictMode>
 );
