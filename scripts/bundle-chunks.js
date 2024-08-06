@@ -19,10 +19,10 @@ require("esbuild")
     },
     minify: true,
     target: "es2015",
-    entryNames: "historic-widget",
+    entryNames: "lrw",
     color: true,
     splitting: true, // Habilita la opción de dividir el código en chunks
-    chunkNames: "lrhw-chunk-[hash]", // Define un patrón de nombres para los chunks generados
+    chunkNames: "lrw-chunk-[hash]", // Define un patrón de nombres para los chunks generados
   })
   .catch(() => process.exit(1))
   .then(() => {});

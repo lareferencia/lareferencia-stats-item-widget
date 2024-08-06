@@ -19,7 +19,7 @@ require("esbuild")
     },
     minify: true,
     target: "es2015",
-    entryNames: "historic-widget",
+    entryNames: "lrw",
     color: true,
   })
   .catch(() => process.exit(1))

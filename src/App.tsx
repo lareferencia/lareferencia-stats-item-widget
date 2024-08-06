@@ -83,13 +83,14 @@ function App() {
         DEFAULT_TIME_UNIT
       );
 
-      if (resp.level) {
+      if (resp.level.buckets.length > 0) {        
         setData(resp);
       } else {
         setError(true);
       }
       setIsLoading(false);
     } catch (error) {
+      setError(true);
       console.error("Error fetching data:", error);
     }
   };
