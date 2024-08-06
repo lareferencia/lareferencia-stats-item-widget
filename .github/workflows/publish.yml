@@ -35,17 +35,28 @@ jobs:
       with:
         cmd: build # will run `yarn build` command
 
-    - name: Pushes files 
+    - name: Pushes dist 
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: dist/ changelog.md package.json
+        source_file: dist/
         destination_repo: 'lareferencia/lrhw'
         user_email: 'lmatas@gmail.com'
         user_name: 'lmatas'
         commit_message: 'Update'
-        
+
+    - name: Pushes package.json 
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source_file: package.json
+        destination_repo: 'lareferencia/lrhw'
+        user_email: 'lmatas@gmail.com'
+        user_name: 'lmatas'
+        commit_message: 'Update'
+    
 
 
 
