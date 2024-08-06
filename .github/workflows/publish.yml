@@ -40,7 +40,7 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source_file: 'dist'
+        source_file: 'dist changelog.md package.json'
         destination_repo: 'lareferencia/lrhw'
         user_email: 'lmatas@gmail..com'
         user_name: 'lmatas'
