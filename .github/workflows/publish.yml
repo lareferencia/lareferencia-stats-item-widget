@@ -34,14 +34,18 @@ jobs:
       uses: borales/actions-yarn@v4
       with:
         cmd: build # will run `yarn build` command
-
-    - uses: GuillaumeFalourd/copy-push-files@v1
+        
+    - name: Pushes files 
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        name: lmatas
-        target_branch: main
-        source_files: dist/ package.json changelog.md
-        remote_repository: git@github.com:lareferencia/lrhw.git
-        access_token: ${{ secrets.GITHUB_TOKEN }}
+        source_file: 'changelog.md'
+        destination_repo: 'lareferencia/lrhw'
+        destination_folder: 'dist'
+        user_email: 'lmatas@gmail..com'
+        user_name: 'lmatas'
+        commit_message: 'Update version'
 
 
 
