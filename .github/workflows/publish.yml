@@ -37,7 +37,7 @@ jobs:
 
     - uses: GuillaumeFalourd/copy-push-files@v1
       with:
-        name: ${{ github.actor }} 
+        name: lmatas
         target_branch: main
         source_files: dist/ package.json changelog.md
         remote_repository: git@github.com:lareferencia/lrhw.git
