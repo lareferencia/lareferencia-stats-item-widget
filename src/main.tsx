@@ -7,7 +7,7 @@ import theme from "./theme.ts";
 
 import "./styles/global.css";
 
-ReactDOM.createRoot(document.getElementById("lrw-widget")!).render(
+ReactDOM.createRoot(document.getElementById("usage-stats")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
