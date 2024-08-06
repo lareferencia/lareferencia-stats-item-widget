@@ -52,7 +52,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
         source_file: package.json
-        destination_repo: 'lareferencia/lrhw'
+        destination_repo: 'lareferencia/lrw'
         user_email: 'lmatas@gmail.com'
         user_name: 'lmatas'
         commit_message: 'Update'
