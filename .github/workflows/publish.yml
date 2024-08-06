@@ -42,7 +42,8 @@ jobs:
       with:
         source-files: 'dist/ changelog.md package.json'
         destination-username: 'lmatas'
-        destination-repository: 'lareferencia/lrhw'
+        destination-repository: 'lareferencia.gihub.io'
+        destination-directory: 'lrhw/'
         commit-email: 'lmatas@gmail.com'
         
 
