@@ -4,8 +4,8 @@ const StatsPanels = React.lazy(() => import("./components/StatsPanels"));
 
 import { byCountryWs, fetchData } from "../../../api/api";
 import {
+  DEFAULT_EMBED_FUNCTION_NAME,
   DEFAULT_END_DATE,
-  DEFAULT_IDENTIFIER,
   DEFAULT_SOURCE_ID,
   DEFAULT_START_DATE,
   DEFAULT_TIME_UNIT,
@@ -14,6 +14,7 @@ import { Box } from "@chakra-ui/react";
 import { ByCountryStats } from "../../../interfaces/by-country-stats.interface";
 import Loading from "../../loading/Loading";
 import { PieChart } from "./components/PieChart";
+import { getIdentifier } from "../../../utils";
 
 interface ByCountryChartsContainerProps {
   tabIndex: number;
@@ -28,12 +29,16 @@ const ByCountryChartsContainer = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const embbedFunction = DEFAULT_EMBED_FUNCTION_NAME;
+  const widgetParams = (window as any)[embbedFunction];
+
   const fetchDataAsync = async () => {
     setIsLoading(true);
+    const identifier = getIdentifier(widgetParams);
     try {
       const resp: ByCountryStats = await fetchData(
         byCountryWs,
-        DEFAULT_IDENTIFIER,
+        identifier,
         DEFAULT_SOURCE_ID,
         startDate || DEFAULT_START_DATE,
         DEFAULT_END_DATE,
