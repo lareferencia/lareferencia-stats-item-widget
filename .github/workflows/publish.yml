@@ -35,16 +35,16 @@ jobs:
       with:
         cmd: build # will run `yarn build` command
 
-    - name: Push generated bundles
-      uses: nkoppel/push-files-to-another-repository@v1.1.3
+    - name: Pushes files 
+      uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       with:
-        source-files: 'dist/ changelog.md package.json'
-        destination-username: 'lmatas'
-        destination-repository: 'lareferencia.gihub.io'
-        destination-directory: 'lrhw/'
-        commit-email: 'lmatas@gmail.com'
+        source_file: dist/ changelog.md package.json
+        destination_repo: 'lareferencia/lrhw'
+        user_email: 'lmatas@gmail.com'
+        user_name: 'lmatas'
+        commit_message: 'Update'
         
 
 
