@@ -6,7 +6,7 @@ export const DEFAULT_BY_COUNTRY_WS = '/report/itemWidgetByCountry';
 
 export const DEFAULT_IDENTIFIER = 'oai:sedici.unlp.edu.ar:10915/133341'
 export const DEFAULT_SOURCE_ID = 'opendoar::1329';
-export const DEFAULT_START_DATE = 'now-6M';
+export const DEFAULT_START_DATE = 'now-1y';
 export const DEFAULT_END_DATE = 'now';
 export const DEFAULT_TIME_UNIT = 'year';
 

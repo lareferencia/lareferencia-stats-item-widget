@@ -8,7 +8,7 @@ const ErrorView = () => {
       alignItems="center"
       height="100%"
     >
-      <Text as="h1">No se encontraró informacion</Text>
+      <Text as="h1">No se encontró información</Text>
     </Box>
   );
 };

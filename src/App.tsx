@@ -51,7 +51,7 @@ function App() {
   const [isByCountryChartsLoaded, setIsByCountryChartsLoaded] = useState(false);
 
   // DATE STATE
-  const [startDate, setStartDate] = useState("now-6M");
+  const [startDate, setStartDate] = useState("now-1y");
 
   // WIDGET PARAMS
   const embbedFunction = DEFAULT_EMBED_FUNCTION_NAME;
