@@ -121,22 +121,22 @@ export const PieChart = ({ data, tabIndex }: PieChartProps) => {
 
         <Grid gridTemplateColumns="repeat(2,1fr)" gap="2">
           <Card display="flex" justifyContent="center" p="2" variant="filled">
-            <Text as="span" fontSize="14px" fontWeight="500" ml="1rem">
+            <Text as="span" fontSize="12px" fontWeight="semibold" ml="1rem">
               Vistas: {showedCountry?.views}
             </Text>
           </Card>
           <Card display="flex" justifyContent="center" p="2" variant="filled">
-            <Text as="span" fontSize="14px" fontWeight="500" ml="1rem">
+            <Text as="span" fontSize="12px" fontWeight="semibold" ml="1rem">
               Descargas: {showedCountry?.downloads}
             </Text>
           </Card>
           <Card display="flex" justifyContent="center" p="2" variant="filled">
-            <Text as="span" fontSize="14px" fontWeight="500" ml="1rem">
+            <Text as="span" fontSize="12px" fontWeight="semibold" ml="1rem">
               Enlaces: {showedCountry?.outlinks}
             </Text>
           </Card>
           <Card display="flex" justifyContent="center" p="2" variant="filled">
-            <Text as="span" fontSize="14px" fontWeight="500" ml="1rem">
+            <Text as="span" fontSize="12px" fontWeight="semibold" ml="1rem">
               Conversiones: {showedCountry?.conversions}
             </Text>
           </Card>

@@ -38,31 +38,33 @@ const StatsPanels = (data: ByCountryStats) => {
         >{`Eventos totales: ${handleTotalEvents}`}</Text>
       </Card>
 
-      <Grid templateColumns="repeat(3, 1fr)" gap={3}>
+      <Grid templateColumns="repeat(1, 1fr)" gap={3}>
         {topThreeCountries.map((country, index) => (
-          <Card
-            key={index}
-            px="4"
-            py="2"
-            variant="filled"
-            display="grid"
-            placeContent="center"
-          >
+          <Card key={index} px="4" py="2" variant="filled" display="flex" flexDir='row'>
+            
+            <Box>
+
             <Text
               as="span"
-              fontWeight="700"
+              fontWeight="bold"
               fontSize="0.8rem"
               overflow="hidden"
               whiteSpace="nowrap"
               isTruncated
-            >
+              >
               {country.country}
             </Text>
+              </Box>
+              <Box>
+
+
             <Text
               as="span"
-              fontWeight="500"
-              fontSize="12px"
-            >{`Total: ${country.total}`}</Text>
+              fontSize="14px"
+              >{`: ${country.total}`}
+            </Text>
+
+              </Box>
           </Card>
         ))}
       </Grid>

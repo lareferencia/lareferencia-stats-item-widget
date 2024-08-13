@@ -8,7 +8,6 @@ import {
   TabPanel,
   Image,
   Box,
-  Divider,
 } from "@chakra-ui/react";
 
 const Loading = React.lazy(() => import("./components/loading/Loading"));
@@ -83,7 +82,7 @@ function App() {
         DEFAULT_TIME_UNIT
       );
 
-      if (resp.level.buckets.length > 0) {        
+      if (resp.level.buckets.length > 0) {
         setData(resp);
       } else {
         setError(true);
@@ -146,7 +145,11 @@ function App() {
           )}
 
           {/* The tabs with the charts and the help img */}
-          <Tabs bgColor="#f1fbf697" onChange={handleTabChange}>
+          <Tabs
+            bgColor="#f1fbf697"
+            onChange={handleTabChange}
+            borderBottom="1px solid #edddddaa"
+          >
             <TabList>
               <Tab fontSize="sm" fontWeight="500">
                 {translate("general-tab")}
@@ -211,8 +214,6 @@ function App() {
               </TabPanel>
             </TabPanels>
           </Tabs>
-
-          <Divider />
 
           {/* Footer img */}
           <Box p="1rem" display="flex" justifyContent="center">

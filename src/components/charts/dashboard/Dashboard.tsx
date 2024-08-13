@@ -66,7 +66,7 @@ export const Dashboard = ({
                   .toUpperCase() +
                   scopeLabels[bucket.key as keyof ScopeLabels].slice(1)}
               </Text>
-              <Text fontSize="12px">
+              <Text as='span' fontSize="12px">
                 {(
                   bucket.downloads.value +
                   bucket.views.value +
