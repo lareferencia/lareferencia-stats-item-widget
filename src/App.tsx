@@ -75,8 +75,8 @@ function App() {
     try {
       const resp = await fetchData(
         itemWs,
-        identifier, // TODO: Quitar el DEFAULT_IDENTIFIER
-        DEFAULT_SOURCE_ID,
+        identifier, 
+        sourceId  || DEFAULT_SOURCE_ID,
         startDate || DEFAULT_START_DATE,
         DEFAULT_END_DATE,
         DEFAULT_TIME_UNIT
@@ -164,7 +164,7 @@ function App() {
 
             <TabPanels>
               {/* General tab */}
-              <TabPanel>
+              <TabPanel p='0' pt='2'>
                 {!error ? (
                   <Box>
                     {isLoading || !data ? (

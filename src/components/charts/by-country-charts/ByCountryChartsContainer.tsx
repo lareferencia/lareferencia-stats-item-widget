@@ -31,6 +31,9 @@ const ByCountryChartsContainer = ({
 
   const embbedFunction = DEFAULT_EMBED_FUNCTION_NAME;
   const widgetParams = (window as any)[embbedFunction];
+  const sourceId =
+    (widgetParams && widgetParams.parameters.repository_source) ||
+    DEFAULT_SOURCE_ID;
 
   const fetchDataAsync = async () => {
     setIsLoading(true);
@@ -39,7 +42,7 @@ const ByCountryChartsContainer = ({
       const resp: ByCountryStats = await fetchData(
         byCountryWs,
         identifier,
-        DEFAULT_SOURCE_ID,
+        sourceId  ||DEFAULT_SOURCE_ID,
         startDate || DEFAULT_START_DATE,
         DEFAULT_END_DATE,
         DEFAULT_TIME_UNIT
