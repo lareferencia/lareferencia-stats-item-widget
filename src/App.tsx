@@ -38,6 +38,8 @@ import { ScopeButtons } from "./components/charts/ScopeButtons";
 import { DateButtons } from "./components/charts/DateButtons";
 import { getIdentifier } from "./utils";
 
+
+
 function App() {
   const { t: translate, i18n } = useTranslation();
 

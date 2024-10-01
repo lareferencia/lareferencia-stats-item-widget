@@ -48,7 +48,6 @@ export const getIdentifier = (widgetParams: any) => {
 
   }
 
-  
   console.log('No identifier found');
   return null;
 }
