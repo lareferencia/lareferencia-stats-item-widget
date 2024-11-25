@@ -40,20 +40,19 @@ const WidgetWrapper = ({ root }: { root: HTMLBodyElement }) => {
 
 function getRootElement() {
   const div = document.getElementById("usage-stats");
-  if (div){
 
   // const div = document.createElement("div");
   // div.id = "usage-stats";
   const body = document.createElement("body");
   // document.body.appendChild(div);
-  const shadowDom = div.attachShadow({ mode: "open" });
+  const shadowDom = div!.attachShadow({ mode: "open" });
 
   
   shadowDom.appendChild(body);
   console.log(div)
   return body;
 }
-}
+
 
 const initSnap = () => {
   let reactRoot: ReactDOM.Root;
