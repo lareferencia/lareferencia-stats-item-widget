@@ -1,7 +1,7 @@
 {
   "name": "item-widget",
   "private": true,
-  "version": "2.1.3",
+  "version": "2.1.4",
   "main": "main.tsx",
   "scripts": {
     "dev": "vite",
