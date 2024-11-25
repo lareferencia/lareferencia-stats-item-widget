@@ -25,8 +25,8 @@ import { CacheProvider } from "@emotion/react";
 
 const WidgetWrapper = ({ root }: { root: HTMLBodyElement }) => {
   const cache = createCache({ key: "c", container: root });
-
   const rootRef = React.useRef<HTMLBodyElement>(root);
+  
   return (
     <Portal containerRef={rootRef}>
       <CacheProvider value={cache}>
@@ -39,22 +39,18 @@ const WidgetWrapper = ({ root }: { root: HTMLBodyElement }) => {
 };
 
 function getRootElement() {
-  const div = document.getElementById("usage-stats");
-
-  // const div = document.createElement("div");
-  // div.id = "usage-stats";
-  const body = document.createElement("body");
-  // document.body.appendChild(div);
-  const shadowDom = div!.attachShadow({ mode: "open" });
-
   
+  const div = document.getElementById("usage-stats");
+  const body = document.createElement("body");
+  const shadowDom = div!.attachShadow({ mode: "open" });  
   shadowDom.appendChild(body);
-  console.log(div)
   return body;
 }
 
 
 const initSnap = () => {
+  console.log("initSnap");
+
   let reactRoot: ReactDOM.Root;
   const rootElement = getRootElement();
   reactRoot = ReactDOM.createRoot(rootElement!);
@@ -63,4 +59,4 @@ const initSnap = () => {
   return () => reactRoot?.unmount?.();
 };
 
-document.addEventListener("DOMContentLoaded", initSnap);
+initSnap();
