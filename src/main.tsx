@@ -45,9 +45,12 @@ function getRootElement() {
   // const div = document.createElement("div");
   // div.id = "usage-stats";
   const body = document.createElement("body");
-  document.body.appendChild(div);
+  // document.body.appendChild(div);
   const shadowDom = div.attachShadow({ mode: "open" });
+
+  
   shadowDom.appendChild(body);
+  console.log(div)
   return body;
 }
 }
